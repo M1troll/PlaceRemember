@@ -1,0 +1,28 @@
+body{
+    background: #333333;
+}
+
+nav{
+    padding: 5%;
+}
+
+.site-description{
+    color: #fff;
+    margin-top: 120px;
+    text-align: center;
+    width: 75%;
+}
+
+.site-description h1{font-size: 50px}
+.site-description p{max-width: 90%; margin: 20px auto; font-size: 15px}
+.site-description .btn-warning{font-size: 15px}
+
+.gradient{
+    font-size: 2em;
+    background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    padding: 0.3em 0.6em ;
+    border: 3px solid transparent;
+}

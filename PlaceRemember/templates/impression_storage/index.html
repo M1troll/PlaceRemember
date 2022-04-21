@@ -5,5 +5,22 @@
 
 
 {% block content %}
-    <button class="btn btn-outline-success">Войти с помощью Facebook/VK</button>
+
+<div class="d-flex justify-content-center">
+
+    <div class="site-description">
+        <div class="gradient"><h1>PlaceRemember</h1></div>
+        <p>Данное веб-приложение предоставляет пользователям возможность хранить свои впечатления о посещаемых местах. <br>
+
+        {% if request.user.is_authenticated %}
+            Чтобы выйти из текущего аккаунта, нажмите кнопку ниже.</p>
+            <button class="btn btn-warning"> Покинуть аккаунт </button>
+        {% else %}
+            Чтобы воспользоваться сервисом, Вам необходимо авторизоваться через ВКонтакте по кнопке ниже.</p>
+            <button class="btn btn-warning"> Войти с помощью VK </button>
+        {% endif %}
+    </div>
+
+</div>
+
 {% endblock %}
