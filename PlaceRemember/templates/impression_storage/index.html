@@ -14,10 +14,10 @@
 
         {% if request.user.is_authenticated %}
             Чтобы выйти из текущего аккаунта, нажмите кнопку ниже.</p>
-            <button class="btn btn-warning"> Покинуть аккаунт </button>
+            <button class="btn btn-warning" onclick="document.location='{% url 'impression_storage:logout' %}'"> Покинуть аккаунт </button>
         {% else %}
             Чтобы воспользоваться сервисом, Вам необходимо авторизоваться через ВКонтакте по кнопке ниже.</p>
-            <button class="btn btn-warning"> Войти с помощью VK </button>
+            <button class="btn btn-warning" onclick="document.location='/login/vk-oauth2'"> Войти с помощью VK </button>
         {% endif %}
     </div>
 

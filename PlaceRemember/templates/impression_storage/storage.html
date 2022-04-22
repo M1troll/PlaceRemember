@@ -7,7 +7,16 @@
 {% block content %}
 
     <div class="d-flex justify-content-center">
+        <div class="site-description">
+            <div class="gradient"><h1>Хранилище</h1></div>
 
+            {% if impressions %}
+                 <button class="btn btn-warning"> Добавить воспоминание </button>
+            {% else %}
+                <p>У вас нет ни одного воспоминания</p>
+                <button class="btn btn-warning"> Добавить воспоминание </button>
+            {% endif %}
+        </div>
     </div>
 
 {% endblock %}
