@@ -1,13 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.views import View
+
+from .models import Impression, Profile
 
 
-def index(request):
+class Index(View):
     context = {}
 
-    return render(request, 'impression_storage/index.html', context)
+    def get(self, request):
+        return render(request, 'impression_storage/index.html', self.context)
 
 
-def storage(request):
+class Storage(View):
     context = {}
 
-    return render(request, 'impression_storage/storage.html', context)
+    def get(self, request):
+        self.context["impressions"] = Impression.objects.filter(author=request.user)
+        return render(request, 'impression_storage/storage.html', self.context)
