@@ -6,17 +6,45 @@
 
 {% block content %}
 
-    <div class="d-flex justify-content-center">
-        <div class="site-description">
-            <div class="gradient"><h1>Хранилище</h1></div>
-
-            {% if impressions %}
-                 <button class="btn btn-warning"> Добавить воспоминание </button>
-            {% else %}
-                <p>У вас нет ни одного воспоминания</p>
-                <button class="btn btn-warning"> Добавить воспоминание </button>
-            {% endif %}
+    <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">
+        <div class="h1 text-center">
+            <p class="gradient">Хранилище</p>
         </div>
     </div>
+
+    <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">
+        {% if impressions %}
+            <a href="{% url 'impression_storage:new_impression' %}" class="btn btn-outline-warning mb-5"> Добавить воспоминание </a>
+        {% else %}
+            <div class="row text-center">
+                <p class="text-light fs-4">У вас нет ни одного воспоминания</p>
+                <a href="{% url 'impression_storage:new_impression' %}" class="btn btn-warning"> Добавить воспоминание </a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    {% if impressions %}
+        <div class="row row-cols-1 row-cols-md-3 g-4 px-4">
+            {% for i in impressions %}
+                {% if not i.is_deleted %}
+                    <div class="col">
+                        <div class="card bg-warning">
+                            <div class="card-header">{{ i.created_at}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ i.title }}</h5>
+                                <p class="card-text">{{ i.description }}</p>
+                                <a href="#" class="btn btn-success">Редактировать</a>
+                                <a href="{% url 'impression_storage:delete_impression' i.pk %}" class="btn btn-danger">Удалить</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Обновлено: {{ i.updated_at|date:"d.m.Y" }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}
