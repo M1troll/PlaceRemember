@@ -14,14 +14,41 @@
 
     <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">
         {% if impressions %}
-            <a href="{% url 'impression_storage:new_impression' %}" class="btn btn-outline-warning mb-5"> Добавить воспоминание </a>
+            <button class="btn btn-outline-warning mb-5 _modal-open" data-modal-open="modal-1"> Добавить воспоминание </button>
         {% else %}
             <div class="row text-center">
                 <p class="text-light fs-4">У вас нет ни одного воспоминания</p>
-                <a href="{% url 'impression_storage:new_impression' %}" class="btn btn-warning"> Добавить воспоминание </a>
+                <button class="btn btn-warning _modal-open" data-modal-open="modal-1"> Добавить воспоминание </button>
             </div>
         {% endif %}
     </div>
+
+    <!-- Modal Form -->
+	<div class="_modal" data-modal="modal-1">
+		<div class="modal-bg">
+			<div class="modal-body">
+				<div class="modal-content modal-callback">
+					<div class="modal-callback__title">Новое воспоминание</div>
+                    <form method="POST" class="modal-form">
+                        {% csrf_token %}
+                        <div>
+                            {% for field in form %}
+                                <div class="row">
+                                    {{ field.label_tag }}
+                                    <div class="col-md-10">{{ field }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <p>
+                            <button class="btn btn-outline-success" type="submit">Создать</button>
+                            <button class="btn btn-outline-danger closeBtn" type="reset">Отмена</button>
+                        </p>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- end Modal Form -->
 
 
     {% if impressions %}
@@ -47,4 +74,6 @@
         </div>
     {% endif %}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/ImpressionFormShow.js' %}"></script>
 {% endblock %}

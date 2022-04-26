@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from .models import Impression
+from .forms import ImpressionForm
 
 
 class Index(View):
@@ -12,11 +13,23 @@ class Index(View):
 
 
 class Storage(View):
-    context = {}
+    context = {
+        'form': ImpressionForm(),
+    }
 
     def get(self, request):
         self.context["impressions"] = Impression.objects.filter(author=request.user)
         return render(request, 'impression_storage/storage.html', self.context)
+
+    @staticmethod
+    def post(request):
+        form = ImpressionForm(request.POST)
+        if form.is_valid():
+            impression = form.save(commit=False)
+            impression.author = request.user
+            impression.save()
+
+        return redirect('/storage/')
 
 
 class AddImpression(View):
