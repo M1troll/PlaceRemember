@@ -5,24 +5,24 @@ from .models import Impression
 from .forms import ImpressionForm
 
 
-class Index(View):
+class IndexView(View):
     context = {}
 
     def get(self, request):
         return render(request, 'impression_storage/index.html', self.context)
 
 
-class Storage(View):
+class StorageView(View):
     context = {
         'form': ImpressionForm(),
     }
 
-    def get(self, request):
+    def get(self, request, pk=''):
         self.context["impressions"] = Impression.objects.filter(author=request.user)
         return render(request, 'impression_storage/storage.html', self.context)
 
     @staticmethod
-    def post(request):
+    def post(request, pk=''):
         form = ImpressionForm(request.POST)
         if form.is_valid():
             impression = form.save(commit=False)
@@ -32,17 +32,7 @@ class Storage(View):
         return redirect('/storage/')
 
 
-class AddImpression(View):
-    context = {}
-
-    def get(self, request):
-        return render(request, 'impression_storage/add_impression.html', self.context)
-
-    def post(self, request):
-        return render(request, 'impression_storage/storage.html', self.context)
-
-
-class DeleteImpression(View):
+class DeleteImpressionView(View):
     context = {}
 
     @staticmethod

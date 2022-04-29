@@ -48,7 +48,7 @@ body._locked {
   background-color: #333333;
   margin: auto;
   max-height: 90%;
-  max-width: 30%;
+  max-width: 50%;
   overflow: auto;
   border-radius: 16px;
   position: relative;
@@ -70,10 +70,19 @@ body._locked {
     font-weight: bold;
     border: 1px solid #ccc;
     border-radius: 6px;
-    height: 25px;
-    width: 300px;
     margin: 5px 5px 5px 0;
     align-items: center;
+    max-width: 90%;
+}
+
+.char{
+    height: 25px;
+    width: 400px;
+}
+
+.textarea{
+    height: 150px;
+    width: 400px;
 }
 
 

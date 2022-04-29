@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-a12ol$zqw2375%em2ga4-y2ff7%b3h6^x#wu!j2#*4$f_g6r%l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",
+]
 
 
 # Application definition
@@ -37,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'impression_storage',
+    # External apps
     'social_django',
+    'location_field.apps.DefaultConfig',
+    # My apps
+    'impression_storage',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +158,20 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
     'impression_storage.pipeline.get_avatar',
 )
+
+
+# Maps API
+YANDEX_MAPS_API_KEY = '88e6c6b3-6c89-4476-b80c-6abbcf606d22'
+
+LOCATION_FIELD_PATH = STATIC_URL + 'location_field'
+LOCATION_FIELD = {
+    'map.provider': 'openstreetmap',
+    'map.zoom': 13,
+    'search.provider': 'nominatim',
+    'search.suffix': '',
+
+    # Mapbox
+    'provider.mapbox.access_token': 'pk.eyJ1IjoibWl0cm9sIiwiYSI6ImNsMmo4aHltdjA0MGIzZWwxc2R2NzFwaGIifQ.VOf4THYLmw7yc6pmhEHExg',
+    'provider.mapbox.max_zoom': 18,
+    'provider.mapbox.id': 'mapbox.streets',
+}

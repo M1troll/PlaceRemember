@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block form-media %} {{ form.media }} {% endblock form-media %}
 {% block title %}Хранилище{% endblock %}
 
 
@@ -29,11 +29,12 @@
 			<div class="modal-body">
 				<div class="modal-content modal-callback">
 					<div class="modal-callback__title">Новое воспоминание</div>
-                    <form method="POST" class="modal-form">
+                    <form method="POST" class="modal-form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div>
                             {% for field in form %}
                                 <div class="row">
+                                    {{ field.errors }}
                                     {{ field.label_tag }}
                                     <div class="col-md-10">{{ field }}</div>
                                 </div>
@@ -74,6 +75,5 @@
         </div>
     {% endif %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/ImpressionFormShow.js' %}"></script>
 {% endblock %}

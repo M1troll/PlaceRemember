@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from location_field.models.plain import PlainLocationField
 
 
 class Profile(models.Model):
@@ -28,15 +29,15 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Impression(models.Model):
-    title = models.CharField(max_length=50, verbose_name="Название места")
-    description = models.TextField(verbose_name="Описание")
+    title = models.CharField("Название места", max_length=50)
+    description = models.TextField("Описание")
 
-    is_deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    is_deleted = models.BooleanField("Удален", default=False)
+    created_at = models.DateTimeField("Дата создания", auto_now_add=True)
+    updated_at = models.DateTimeField("Дата обновления", auto_now=True)
 
-    lon = models.FloatField(verbose_name="Долгота")
-    lat = models.FloatField(verbose_name="Широта")
+    address = models.CharField('Адрес', max_length=255)
+    location = PlainLocationField(based_fields=['address'], zoom=7, default='')
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
 
