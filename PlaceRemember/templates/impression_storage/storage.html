@@ -23,7 +23,8 @@
         {% endif %}
     </div>
 
-    <!-- Modal Form -->
+    <!-- Modal Forms -->
+    <!-- New Impression -->
 	<div class="_modal" data-modal="modal-1">
 		<div class="modal-bg">
 			<div class="modal-body">
@@ -49,8 +50,8 @@
 			</div>
 		</div>
 	</div>
-    <!-- end Modal Form -->
-
+    <!-- end New Impression -->
+    <!-- end Modal Forms -->
 
     {% if impressions %}
         <div class="row row-cols-1 row-cols-md-3 g-4 px-4">
@@ -62,7 +63,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ i.title }}</h5>
                                 <p class="card-text">{{ i.description }}</p>
-                                <a href="#" class="btn btn-success">Редактировать</a>
+                                <a href="{% url 'impression_storage:storage_edit' i.pk %}" class="btn btn-success">Редактировать</a>
                                 <a href="{% url 'impression_storage:delete_impression' i.pk %}" class="btn btn-danger">Удалить</a>
                             </div>
                             <div class="card-footer text-muted">
