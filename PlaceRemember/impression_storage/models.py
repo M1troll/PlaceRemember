@@ -37,7 +37,7 @@ class Impression(models.Model):
     updated_at = models.DateTimeField("Дата обновления", auto_now=True)
 
     address = models.CharField('Адрес', max_length=255)
-    location = PlainLocationField(based_fields=['address'], zoom=7, default='')
+    location = PlainLocationField(based_fields=['address'], zoom=7, default='', verbose_name='Координаты')
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
 
