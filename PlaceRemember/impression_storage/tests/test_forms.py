@@ -27,4 +27,3 @@ class ImpressionFormTest(TestCase):
         location = form.fields['location'].label
 
         self.assertTrue(location == 'Координаты')
-

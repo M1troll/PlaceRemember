@@ -1,7 +1,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from ..models import *
-from social_django.models import UserSocialAuth
 
 
 class ViewTemplateTest(TestCase):
@@ -18,7 +17,7 @@ class ViewTemplateTest(TestCase):
         self.authorized_client.force_login(self.user)
 
         # Add impression in db for tests
-        Impression.objects.create(author=self.user, title=f'Место', description=f'Тут много написано',
+        Impression.objects.create(author=self.user, title='Место', description='Тут много написано',
                                   address='Moscow', location='55.7504461,37.6174943')
 
     def test_pages_uses_correct_templates(self):
@@ -189,4 +188,3 @@ class DeleteImpressionViewTest(TestCase):
         response = self.authorized_client.get(reverse('impression_storage:storage_edit', kwargs={'pk': 1}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/storage/')
-

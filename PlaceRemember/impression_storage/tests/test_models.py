@@ -96,4 +96,3 @@ class ProfileStorageModelTest(TestCase):
         username = f'{profile}'
 
         self.assertEquals(username, user.username)
-

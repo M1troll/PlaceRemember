@@ -1,0 +1,7 @@
+[flake8]
+ignore = E501,    # Length of code
+         F403,    # .models
+         F405,    # Import *
+         DJ01     # null=True
+
+exclude = */migrations
