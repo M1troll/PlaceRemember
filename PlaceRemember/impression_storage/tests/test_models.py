@@ -7,11 +7,11 @@ class ImpressionStorageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """ Run once to set up non-modified data for all class methods """
-        user = User.objects.create(id=1, username='Пользователь', password='ЯПользователь228.',
-                                   first_name='Моё первое (шутка) имя', last_name='Моё второе (не шутка) имя',
-                                   email='IwantToBreakFree@mail.ru')
+        User.objects.create(id=1, username='Пользователь', password='ЯПользователь228.',
+                            first_name='Моё первое (шутка) имя', last_name='Моё второе (не шутка) имя',
+                            email='IwantToBreakFree@mail.ru')
 
-        Impression.objects.create(author=user, title='Место', description='Тут много написано',
+        Impression.objects.create(author_id=1, title='Место', description='Тут много написано',
                                   address='Moscow', location='55.7504461,37.6174943')
 
     def tearDown(self):
