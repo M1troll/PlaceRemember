@@ -45,6 +45,11 @@ class EditStorageView(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             impression = Impression.objects.get(pk=pk)
+
+            # Check the deletion
+            if impression.is_deleted:
+                return redirect('/storage/')
+
         except Impression.DoesNotExist:
             return render(request, 'impression_storage/storage.html', self.context)
 
